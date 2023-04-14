@@ -4,6 +4,7 @@ import glob
 import shutil
 import inspect
 import subprocess
+import platform
 
 import maya.OpenMayaUI as openUI
 import pymel.core as pm
@@ -34,6 +35,7 @@ for __module in (brain, getCurrentDirectory):
 __TOOL_NAME__ = "ANgular"
 cwd = getCurrentDirectory.getcwd()
 _FFMPEG_EXE_PATH_ = '{}/ffmpeg_exe/ffmpeg.exe'.format(cwd)
+_PLATFORM_ = platform.system()
 
 def printdebug(*args):
     print(args)
@@ -516,10 +518,17 @@ class PlayblastUI(QtWidgets.QDialog):
         si = subprocess.STARTUPINFO()
         si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
         try:
-            process = subprocess.Popen(command_to_run, startupinfo= si)
-            process.communicate()
-            process.wait()
-            return True
+            if _PLATFORM_ == 'Darwin':
+                env = {'PATH': '/usr/local/bin:/usr/bin:/bin'}
+                process = subprocess.Popen(['ls', '-l'], env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                process.communicate()
+                process.wait()
+                return True
+            else:
+                process = subprocess.Popen(command_to_run, startupinfo= si)
+                process.communicate()
+                process.wait()
+                return True
         except Exception as e:
             pm.confirmDialog(icon = 'critical', title = 'Error', message = 'Following error occurred while compiling video \n{}'.format(e))
             return False
