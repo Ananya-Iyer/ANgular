@@ -521,7 +521,7 @@ class PlayblastUI(QtWidgets.QDialog):
             if _PLATFORM_ == 'Darwin':
                 env = {'PATH': '/usr/local/bin:/usr/bin:/bin'}
                 process = subprocess.Popen(['ls', '-l'], env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                process.communicate()
+                stdout, stderr = process.communicate()
                 process.wait()
                 return True
             else:
