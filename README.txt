@@ -8,7 +8,10 @@ An artist can see different views of the same file using this tool.
 
 Keep the ANgularBrain & ANgularBody py files and the ffmpeg.exe file in the maya scripts folder.
 Make sure you copy the ffmpeg folder and the prefs folder to your maya documents to avoid unnecessary errors.
-(You'll find the ffmpeg & prefs folder in the link here: https://drive.google.com/drive/folders/1wtCBZAOrAMOcNAbzzMR1m72yRbXBcWqe?usp=share_link)
+(You'll find the ffmpeg & prefs folder in the link here : 
+1. For windows users: https://drive.google.com/drive/folders/1wtCBZAOrAMOcNAbzzMR1m72yRbXBcWqe?usp=share_link
+2. For Mac users you can download the ffmpeg dmg file from here: https://evermeet.cx/ffmpeg/)
+
 
 Run the following in maya script editor
 	
