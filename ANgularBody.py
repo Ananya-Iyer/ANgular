@@ -515,8 +515,7 @@ class PlayblastUI(QtWidgets.QDialog):
         '''
         runs the ffmpeg compilation headless command
         '''
-        si = subprocess.STARTUPINFO()
-        si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+
         try:
             if _PLATFORM_ == 'Darwin':
                 env = {'PATH': '/usr/local/bin:/usr/bin:/bin'}
@@ -525,6 +524,8 @@ class PlayblastUI(QtWidgets.QDialog):
                 process.wait()
                 return True
             else:
+                si = subprocess.STARTUPINFO()
+                si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
                 process = subprocess.Popen(command_to_run, startupinfo= si)
                 process.communicate()
                 process.wait()
